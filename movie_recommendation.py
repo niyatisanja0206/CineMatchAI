@@ -15,8 +15,8 @@ deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
 api_version = os.getenv("AZURE_OPENAI_API_VERSION")
 
 # Page setup
-st.set_page_config(page_title="Bollywood Recommender", layout="wide", page_icon="🎬")
-st.title("🎬 Bollywood Movie Recommender")
+st.set_page_config(page_title="CineMatch AI", layout="wide", page_icon="🎬")
+st.title("🎬 CineMatch AI - Bollywood Movie Recommender")
 
 # Sidebar for preferences
 with st.sidebar:
