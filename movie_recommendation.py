@@ -16,27 +16,6 @@ api_version = os.getenv("AZURE_OPENAI_API_VERSION")
 
 # Page config and theme
 st.set_page_config(page_title="🎬 CineMatch AI", layout="wide", page_icon="🎞️")
-st.markdown(
-    """
-    <style>
-        .stApp {
-            background: linear-gradient(135deg, #e0eafc, #cfdef3);
-            font-family: 'Segoe UI', sans-serif;
-        }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-        .big-font {
-            font-size: 20px !important;
-        }
-        .small-caption {
-            font-size: 13px;
-            color: #7f8c8d;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 st.markdown("<h1 style='text-align: center;'>🎬 CineMatch AI</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #34495e;'>Your personalized Bollywood movie guide</p>", unsafe_allow_html=True)
@@ -99,7 +78,7 @@ if get_recommend:
 st.markdown("---")
 
 # Movie search
-st.subheader("🔍 Movie Info Lookup (Wikipedia + DuckDuckGo)")
+st.subheader("🔍 Movie Info Lookup")
 search_query = st.text_input("Enter a movie name to search", placeholder="e.g. Laila Majnu 2018")
 
 if st.button("🔎 Search Now"):
