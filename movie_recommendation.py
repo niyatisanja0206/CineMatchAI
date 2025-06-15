@@ -15,7 +15,7 @@ deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
 api_version = os.getenv("AZURE_OPENAI_API_VERSION")
 
 # Page config and theme
-st.set_page_config(page_title="🎬 CineMatch AI", layout="wide", page_icon="🎞️")
+st.set_page_config(page_title="CineMatch AI", layout="wide", page_icon="🎞️")
 
 st.markdown("<h1 style='text-align: center;'>🎬 CineMatch AI</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #34495e;'>Your personalized Bollywood movie guide</p>", unsafe_allow_html=True)
