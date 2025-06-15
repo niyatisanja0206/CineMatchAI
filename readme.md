@@ -47,7 +47,7 @@ venv\Scripts\activate
 **Mac/Linux:**
 source venv/bin/activate
 
-# Install Requirements
+### Install Requirements
 pip install -r requirements.txt
 
 ###  Create a .env File
