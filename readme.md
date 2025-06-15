@@ -57,7 +57,7 @@ AZURE_OPENAI_API_VERSION=2024-05-01-preview
 streamlit run app.py
 
 
-## Future Enhancements
+## 🚧 Future Enhancements
 
  Add movie poster integration (OMDb/TMDb)
 
