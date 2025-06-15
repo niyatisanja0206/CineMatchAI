@@ -2,7 +2,6 @@
 
 An AI-powered web app that recommends Bollywood movies based on your preferences and fetches detailed movie info using Wikipedia and DuckDuckGo. Built with **Streamlit**, **LangChain**, and **Azure GPT-4o**.
 
----
 
 ## 🚀 Features
 
@@ -16,7 +15,6 @@ An AI-powered web app that recommends Bollywood movies based on your preferences
 - 🧠 GPT-4o via Azure OpenAI
 - 🔐 Environment variable support via `.env`
 
----
 
 ## 🧰 Tech Stack
 
@@ -27,7 +25,6 @@ An AI-powered web app that recommends Bollywood movies based on your preferences
 - Wikipedia API
 - Python 3.8+
 
----
 
 ## 🛠️ Setup Instructions
 
@@ -59,7 +56,6 @@ AZURE_OPENAI_API_VERSION=2024-05-01-preview
 ### Run the App
 streamlit run app.py
 
----
 
 ## Future Enhancements
 
