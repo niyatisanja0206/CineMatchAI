@@ -16,7 +16,7 @@ api_version = os.getenv("AZURE_OPENAI_API_VERSION")
 
 # Page setup
 st.set_page_config(page_title="CineMatch AI", layout="wide", page_icon="🎬")
-st.title("🎬 CineMatch AI - Bollywood Movie Recommender")
+st.title("🎬 CineMatch AI - Get your Bollywood Movie Recommendations")
 
 # Sidebar for preferences
 with st.sidebar:
