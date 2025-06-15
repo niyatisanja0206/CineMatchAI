@@ -14,21 +14,44 @@ api_base = os.getenv("AZURE_OPENAI_API_BASE")
 deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
 api_version = os.getenv("AZURE_OPENAI_API_VERSION")
 
-# Page setup
-st.set_page_config(page_title="CineMatch AI", layout="wide", page_icon="🎬")
-st.title("🎬 CineMatch AI - Get your Bollywood Movie Recommendations")
+# Page config and theme
+st.set_page_config(page_title="🎬 CineMatch AI", layout="wide", page_icon="🎞️")
+st.markdown(
+    """
+    <style>
+        .stApp {
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            font-family: 'Segoe UI', sans-serif;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .big-font {
+            font-size: 20px !important;
+        }
+        .small-caption {
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-# Sidebar for preferences
+st.markdown("<h1 style='text-align: center;'>🎬 CineMatch AI</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #34495e;'>Your personalized Bollywood movie guide</p>", unsafe_allow_html=True)
+
+# Sidebar Preferences
 with st.sidebar:
     st.header("🎯 Movie Preferences")
-    genre = st.selectbox("Genre", ["Action", "Comedy", "Drama", "Romance", "Thriller", "Horror", "Sci-Fi", "Fantasy", "Musical", "Documentary", "Suspense", "Adventure", "Historical", "Mystery", "Animation", "Family", "Crime", "Biography", "Sports", "War"])
-    actor = st.text_input("Actor Name")
-    actress = st.text_input("Actress Name")
-    director = st.text_input("Director Name")
+    genre = st.selectbox("Choose Genre", ["Action", "Comedy", "Drama", "Romance", "Thriller", "Horror", "Sci-Fi", "Fantasy", "Musical", "Documentary", "Suspense", "Adventure", "Historical", "Mystery", "Animation", "Family", "Crime", "Biography", "Sports", "War"])
+    actor = st.text_input("Favorite Actor")
+    actress = st.text_input("Favorite Actress")
+    director = st.text_input("Favorite Director")
     year_range = st.slider("Year Range", 1960, 2025, (2000, 2024))
     get_recommend = st.button("🎥 Recommend Movies")
 
-# LLM setup
+# Initialize LLM
 @st.cache_resource
 def init_chain():
     llm = AzureChatOpenAI(
@@ -58,9 +81,9 @@ Give a brief reason for each recommendation.
 
 llmchain = init_chain()
 
-# 🎬 Recommendations
+# Recommendation section
 if get_recommend:
-    with st.spinner("Generating recommendations..."):
+    with st.spinner("✨ Finding the perfect movies for you..."):
         response = llmchain.invoke({
             "genre": genre,
             "actor": actor,
@@ -69,31 +92,32 @@ if get_recommend:
             "start_year": year_range[0],
             "end_year": year_range[1]
         })
-        st.subheader("🎬 Recommended Movies:")
-        st.markdown(response['text'])
+        st.subheader("🎬 Top Picks Just for You")
+        st.markdown(f"<div class='big-font'>{response['text']}</div>", unsafe_allow_html=True)
 
-# 🔍 Search section
+# Separator
 st.markdown("---")
-st.subheader("🔎 Search Bollywood Movie Info (Wikipedia + DuckDuckGo)")
 
-search_query = st.text_input("Enter a movie name to search")
+# Movie search
+st.subheader("🔍 Movie Info Lookup (Wikipedia + DuckDuckGo)")
+search_query = st.text_input("Enter a movie name to search", placeholder="e.g. Laila Majnu 2018")
 
-if st.button("Search Now"):
+if st.button("🔎 Search Now"):
     if not search_query.strip():
-        st.warning("Please enter a movie name.")
+        st.warning("⚠️ Please enter a valid movie name.")
     else:
         wiki_summary, wiki_url, ddg_results, poster_url = None, None, [], None
 
-        # Wikipedia lookup
+        # Wikipedia fetch
         try:
             wiki_summary = wikipedia.summary(search_query, sentences=5, auto_suggest=True, redirect=True)
             wiki_url = wikipedia.page(search_query, auto_suggest=True).url
         except wikipedia.DisambiguationError as e:
-            wiki_summary = f"Disambiguation: try being more specific. Suggestions: {', '.join(e.options[:3])}"
+            wiki_summary = f"Too many matches. Try one of: {', '.join(e.options[:3])}"
         except:
             wiki_summary = None
 
-        # DuckDuckGo search & image fetch
+        # DuckDuckGo search and poster
         try:
             with DDGS() as ddgs:
                 ddg_results = list(ddgs.text(search_query + " bollywood movie", max_results=5))
@@ -103,22 +127,26 @@ if st.button("Search Now"):
         except:
             pass
 
-        # Display results
         if wiki_summary or ddg_results:
+            st.markdown("## 🧾 Movie Overview")
+
             if poster_url:
-                st.image(poster_url, caption="🎬 Movie Poster", use_column_width=True)
+                st.image(poster_url, caption="🎞️ Poster", use_column_width=True)
+
+            col1, col2 = st.columns(2)
 
             if wiki_summary:
-                st.info("📚 Wikipedia Summary")
-                if wiki_url:
-                    st.markdown(f"**[{search_query} on Wikipedia]({wiki_url})**")
-                st.write(wiki_summary)
+                with col1:
+                    st.info("📚 Wikipedia")
+                    if wiki_url:
+                        st.markdown(f"🔗 [View on Wikipedia]({wiki_url})")
+                    st.write(wiki_summary)
 
             if ddg_results:
-                st.info("🌐 DuckDuckGo Web Results")
-                for r in ddg_results:
-                    st.markdown(f"**[{r['title']}]({r['href']})**")
-                    st.caption(r['body'])
-
+                with col2:
+                    st.info("🌐 DuckDuckGo Web Links")
+                    for r in ddg_results:
+                        st.markdown(f"🔗 **[{r['title']}]({r['href']})**")
+                        st.caption(r['body'])
         else:
-            st.error("❌ No results found from Wikipedia or DuckDuckGo.")
+            st.error("🚫 No info found on this movie. Try a different name.")
