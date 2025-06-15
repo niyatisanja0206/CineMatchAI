@@ -31,16 +31,16 @@ An AI-powered web app that recommends Bollywood movies based on your preferences
 
 ## 🛠️ Setup Instructions
 
-# Clone the Repository
+### Clone the Repository
 
 git clone https://github.com/your-username/bollywood-recommender.git
 cd bollywood-recommender
 
-# Create a Virtual Environment
+### Create a Virtual Environment
 
 python -m venv venv
 
-# Activate:
+### Activate:
 **Windows:**
 venv\Scripts\activate
 
@@ -50,13 +50,13 @@ source venv/bin/activate
 # Install Requirements
 pip install -r requirements.txt
 
-#  Create a .env File
+###  Create a .env File
 AZURE_OPENAI_API_KEY=your-api-key
 AZURE_OPENAI_API_BASE=https://your-resource-name.openai.azure.com/
 AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4o
 AZURE_OPENAI_API_VERSION=2024-05-01-preview
 
-# Run the App
+### Run the App
 streamlit run app.py
 
 ---
@@ -69,4 +69,3 @@ streamlit run app.py
 
  Better fallback handling for missing data
 
----
