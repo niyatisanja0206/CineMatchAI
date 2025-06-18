@@ -18,12 +18,12 @@ api_version = os.getenv("AZURE_OPENAI_API_VERSION")
 st.set_page_config(page_title="CineMatch AI", layout="wide", page_icon="🎞️")
 
 st.markdown("<h1 style='text-align: center;'>🎬 CineMatch AI</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #34495e;'>Your personalized Bollywood movie guide</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #34495e;'>Your personalized Bollywood movie guide for Bollywood Diwane</p>", unsafe_allow_html=True)
 
 # Sidebar Preferences
 with st.sidebar:
     st.header("🎯 Movie Preferences")
-    genre = st.selectbox("Choose Genre", ["Action", "Comedy", "Drama", "Romance", "Thriller", "Horror", "Sci-Fi", "Fantasy", "Musical", "Documentary", "Suspense", "Adventure", "Historical", "Mystery", "Animation", "Family", "Crime", "Biography", "Sports", "War"])
+    genre = st.selectbox("Choose Genre", ["Action", "Comedy", "Drama", "Romance", "Thriller", "Horror", "Sci-Fi", "Fantasy", "Musical", "Documentary", "Suspense", "Adventure", "Historical", "Mystery", "Animation", "Family", "Crime", "Biography", "Sports", "War", "Western", "Musical", "Dance", "Mythology", "Social Issues", "Psychological", "Superhero"])
     actor = st.text_input("Favorite Actor")
     actress = st.text_input("Favorite Actress")
     director = st.text_input("Favorite Director")
