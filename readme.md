@@ -39,23 +39,28 @@ python -m venv venv
 
 ### Activate:
 **Windows:**
+```bash
 venv\Scripts\activate
-
+```
 **Mac/Linux:**
+```bash
 source venv/bin/activate
-
+```
 ### Install Requirements
+```bash
 pip install -r requirements.txt
-
+```
 ###  Create a .env File
+```
 AZURE_OPENAI_API_KEY=your-api-key
 AZURE_OPENAI_API_BASE=https://your-resource-name.openai.azure.com/
 AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4o
 AZURE_OPENAI_API_VERSION=2024-05-01-preview
-
+```
 ### Run the App
+```bash
 streamlit run app.py
-
+```
 
 ## 🚧 Future Enhancements
 
